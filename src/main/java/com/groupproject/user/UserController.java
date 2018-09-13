@@ -1,10 +1,11 @@
 package com.groupproject.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/api/users")
 class UserController {
 
@@ -15,5 +16,18 @@ class UserController {
         this.userService = userService;
     }
 
+    @PostMapping
+    public UserDto createUser(@RequestBody UserCreateDto userCreateDto) {
+        return userService.create(userCreateDto);
+    }
 
+    @GetMapping
+    public List<UserDto> findAllUsers() {
+        return userService.findAll();
+    }
+
+    @DeleteMapping("/{uuid}")
+    public void deleteUser(@PathVariable String uuid) {
+        userService.delete(uuid);
+    }
 }
