@@ -1,10 +1,12 @@
 package com.groupproject.user;
 
+import com.groupproject.commons.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-class User {
+class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
