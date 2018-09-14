@@ -1,5 +1,7 @@
 package com.groupproject.game;
 
+import com.groupproject.match.Match;
+
 public class GameDto {
 
     private Match match;

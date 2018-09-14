@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-class Match extends BaseEntity {
+public class Match extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

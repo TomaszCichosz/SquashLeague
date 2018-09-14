@@ -1,6 +1,7 @@
 package com.groupproject.game;
 
 import com.groupproject.commons.BaseEntity;
+import com.groupproject.match.Match;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
