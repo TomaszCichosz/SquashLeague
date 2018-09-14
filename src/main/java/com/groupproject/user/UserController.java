@@ -18,11 +18,13 @@ class UserController {
     }
 
     @PostMapping
+    @ResponseBody
     public UserDto createUser(@RequestBody UserCreateDto userCreateDto) {
         return userService.create(userCreateDto);
     }
 
     @GetMapping
+    @ResponseBody
     public List<UserDto> findAllUsers() {
         return userService.findAll();
     }

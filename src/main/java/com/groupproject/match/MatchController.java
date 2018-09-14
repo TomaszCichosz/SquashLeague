@@ -18,11 +18,13 @@ class MatchController {
     }
 
     @GetMapping
+    @ResponseBody
     public List<MatchDto> findAllMatches() {
         return matchService.findAll();
     }
 
     @PostMapping
+    @ResponseBody
     public MatchDto create(@RequestBody MatchCreateDto dto) {
         return matchService.create(dto);
     }
