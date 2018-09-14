@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/matches")
-public class MatchController {
+class MatchController {
 
     private MatchService matchService;
 
@@ -17,17 +17,17 @@ public class MatchController {
     }
 
     @GetMapping
-    public List<MatchDto> findAllMatches(){
+    public List<MatchDto> findAllMatches() {
         return matchService.findAll();
     }
 
     @PostMapping
-    public MatchDto create(@RequestBody MatchCreateDto dto){
-       return matchService.create(dto);
+    public MatchDto create(@RequestBody MatchCreateDto dto) {
+        return matchService.create(dto);
     }
 
     @DeleteMapping
-    public void deleteUser(@PathVariable String uuid){
+    public void deleteUser(@PathVariable String uuid) {
         matchService.delete(uuid);
     }
 }
