@@ -3,10 +3,7 @@ package com.groupproject.game;
 import com.groupproject.commons.BaseEntity;
 import com.groupproject.match.Match;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Game extends BaseEntity {
@@ -14,6 +11,7 @@ public class Game extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Match match;
     private int gameNumber;
     private int hostResult;

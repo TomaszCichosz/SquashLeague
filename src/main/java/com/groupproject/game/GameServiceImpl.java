@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class GameServiceImpl implements GameService {
+class GameServiceImpl implements GameService {
 
     private GameRepository gameRepository;
 
