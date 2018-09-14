@@ -5,6 +5,7 @@ import com.groupproject.game.Game;
 import com.groupproject.user.User;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ class Match extends BaseEntity {
     @ManyToOne
     private User guest;
     @OneToMany(mappedBy = "match")
-    private Set<Game> games;
+    private Set<Game> games = new HashSet<>();
 
     public Match() {
     }
