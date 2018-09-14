@@ -2,7 +2,7 @@ package com.groupproject.match;
 
 import com.groupproject.user.User;
 
-public class MatchDto {
+class MatchDto {
 
     private User host;
     private User guest;
