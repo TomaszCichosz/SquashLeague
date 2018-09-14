@@ -18,11 +18,13 @@ class GameController {
     }
 
     @GetMapping
+    @ResponseBody
     public List<GameDto> findAllGames(){
         return gameService.findAll();
     }
 
     @PostMapping
+    @ResponseBody
     public GameDto createGame(@RequestBody GameCreateDto createDto){
         return gameService.create(createDto);
     }
