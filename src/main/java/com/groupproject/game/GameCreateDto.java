@@ -4,7 +4,7 @@ import com.groupproject.match.Match;
 
 class GameCreateDto {
 
-    private Match match;
+    private String matchUuid;
     private int gameNumber;
     private int hostResult;
     private int guestResult;
@@ -12,8 +12,8 @@ class GameCreateDto {
     public GameCreateDto() {
     }
 
-    public Match getMatch() {
-        return match;
+    public String  getMatchUuid() {
+        return matchUuid;
     }
 
     public int getGameNumber() {
@@ -27,4 +27,6 @@ class GameCreateDto {
     public int getGuestResult() {
         return guestResult;
     }
+
+
 }

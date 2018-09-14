@@ -1,7 +1,6 @@
 package com.groupproject.game;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +12,12 @@ import java.util.stream.Collectors;
 class GameServiceImpl implements GameService {
 
     private GameRepository gameRepository;
+    private GameFacade gameFacade;
 
     @Autowired
-    public GameServiceImpl(GameRepository gameRepository) {
+    public GameServiceImpl(GameRepository gameRepository, GameFacade gameFacade) {
         this.gameRepository = gameRepository;
+        this.gameFacade = gameFacade;
     }
 
     @Override
@@ -31,7 +32,10 @@ class GameServiceImpl implements GameService {
 
     @Override
     public GameDto create(GameCreateDto dto) {
-        Game game = new Game(dto.getMatch(), dto.getGameNumber(), dto.getHostResult(), dto.getGuestResult());
+        Game game = new Game(gameFacade.getMatchFacade().getMatchByUuid(dto.getMatchUuid()),
+                dto.getGameNumber(),
+                dto.getHostResult(),
+                dto.getHostResult());
         return new GameDto(gameRepository.save(game));
     }
 

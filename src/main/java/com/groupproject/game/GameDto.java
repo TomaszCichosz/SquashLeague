@@ -4,7 +4,7 @@ import com.groupproject.match.Match;
 
 class GameDto {
 
-    private Match match;
+    private String matchUuid;
     private int gameNumber;
     private int hostResult;
     private int guestResult;
@@ -13,14 +13,14 @@ class GameDto {
     }
 
     public GameDto(Game game) {
-        this.match = game.getMatch();
+        this.matchUuid = game.getMatch().getUuid();
         this.gameNumber = game.getGameNumber();
         this.hostResult = game.getHostResult();
         this.guestResult = game.getGuestResult();
     }
 
-    public Match getMatch() {
-        return match;
+    public String getMatchUuid() {
+        return matchUuid;
     }
 
     public int getGameNumber() {
