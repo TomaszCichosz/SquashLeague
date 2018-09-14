@@ -12,10 +12,12 @@ import java.util.stream.Collectors;
 class MatchServiceImpl implements MatchService{
 
     private MatchRepository matchRepository;
+    private MatchFacade matchFacade;
 
     @Autowired
-    public MatchServiceImpl(MatchRepository matchRepository) {
+    public MatchServiceImpl(MatchRepository matchRepository, MatchFacade matchFacade) {
         this.matchRepository = matchRepository;
+        this.matchFacade = matchFacade;
     }
 
     @Override
@@ -32,7 +34,8 @@ class MatchServiceImpl implements MatchService{
 
     @Override
     public MatchDto create(MatchCreateDto dto){
-        Match match=new Match(dto.getHost(),dto.getGuest());
+        Match match=new Match(matchFacade.getUserFacade().getUserByUuid(dto.getHostUuid()),
+                matchFacade.getUserFacade().getUserByUuid(dto.getGuestUuid()));
         return new MatchDto(matchRepository.save(match));
     }
 

@@ -4,22 +4,22 @@ import com.groupproject.user.User;
 
 class MatchCreateDto {
 
-    private User host;
-    private User guest;
+    private String hostUuid;
+    private String guestUuid;
 
     public MatchCreateDto() {
     }
 
-    public MatchCreateDto(User host, User guest) {
-        this.host = host;
-        this.guest = guest;
+    public MatchCreateDto(String hostUuid, String guestUuid) {
+        this.hostUuid = hostUuid;
+        this.guestUuid = guestUuid;
     }
 
-    public User getHost() {
-        return host;
+    public String getHostUuid() {
+        return hostUuid;
     }
 
-    public User getGuest() {
-        return guest;
+    public String getGuestUuid() {
+        return guestUuid;
     }
 }
