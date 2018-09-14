@@ -2,7 +2,7 @@ package com.groupproject.game;
 
 import com.groupproject.match.Match;
 
-public class GameDto {
+class GameDto {
 
     private Match match;
     private int gameNumber;

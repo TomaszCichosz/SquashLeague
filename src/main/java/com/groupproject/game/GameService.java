@@ -2,7 +2,7 @@ package com.groupproject.game;
 
 import java.util.List;
 
-public interface GameService {
+interface GameService {
 
         List<GameDto> findAll();
 
