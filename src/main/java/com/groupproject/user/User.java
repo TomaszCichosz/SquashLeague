@@ -1,8 +1,10 @@
 package com.groupproject.user;
 
 import com.groupproject.commons.BaseEntity;
+import com.groupproject.match.Match;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,19 +16,17 @@ public class User extends BaseEntity {
     private String name;
     private String surname;
     private String email;
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String login;
-    @Column(nullable = false)
     private String password;
     private Integer ranking;
     private Integer gamesWon;
     private Integer gamesLost;
 
-    //TODO create associations
-    //@OneToMany(mappedBy = "host")
-    //private Set<Match> gamesAsHost;
-    //@OneToMany(mappedBy = "guest")
-    //private Set<Match> gamesAsGuest;
+    @OneToMany(mappedBy = "host")
+    private Set<Match> gamesAsHost = new HashSet<>();
+    @OneToMany(mappedBy = "guest")
+    private Set<Match> gamesAsGuest = new HashSet<>();
 
 
     public User() {
@@ -89,5 +89,13 @@ public class User extends BaseEntity {
 
     public Integer getGamesLost() {
         return gamesLost;
+    }
+
+    public Set<Match> getGamesAsHost() {
+        return gamesAsHost;
+    }
+
+    public Set<Match> getGamesAsGuest() {
+        return gamesAsGuest;
     }
 }
