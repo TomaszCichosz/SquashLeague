@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EloRatingConstants {
+class EloRatingConstants {
 
     static final int K_FACTOR_FOR_AMATEUR_PLAYER = 32;
     static final int K_FACTOR_FOR_SEMI_PROFESSIONAL_PLAYER = 24;
