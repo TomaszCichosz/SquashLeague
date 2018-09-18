@@ -10,7 +10,7 @@ class EloRatingService {
     EloRatingService() {
     }
 
-    Integer getNewRating(Integer playerRating, Integer opponentRating, String matchResult) {
+    int getNewRating(int playerRating, int opponentRating, String matchResult) {
         BigDecimal kFactor = new BigDecimal(getKFactor(playerRating));
         Integer ratingDifference = getRatingDifference(playerRating, opponentRating);
         BigDecimal expectedScore = EloRatingConstants.EXPECTED_SCORE_TABLE.get(ratingDifference);
@@ -21,7 +21,7 @@ class EloRatingService {
                 .intValueExact();
     }
 
-    private Integer getKFactor(Integer playerRating) {
+    private int getKFactor(int playerRating) {
         int KFactor;
         if (playerRating < 2100) {
             KFactor = EloRatingConstants.K_FACTOR_FOR_AMATEUR_PLAYER;
@@ -33,7 +33,7 @@ class EloRatingService {
         return KFactor;
     }
 
-    private Integer getRatingDifference(Integer playerRating, Integer opponentRating) {
+    private int getRatingDifference(int playerRating, int opponentRating) {
         int ratingDifference = playerRating - opponentRating;
         int endIndex = EloRatingConstants.RATING_DIFFERENCE_TABLE.length;
         for (int i = 0; i < endIndex; i++) {
