@@ -13,4 +13,6 @@ interface UserRepository extends CrudRepository<User, Long> {
     User findOneByUuid(String uuid);
 
     void deleteByUuid(String uuid);
+
+    User findOneByLogin(String login);
 }
