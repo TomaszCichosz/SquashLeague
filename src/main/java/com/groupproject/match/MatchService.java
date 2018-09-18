@@ -10,4 +10,6 @@ interface MatchService {
     MatchDto create(MatchCreateDto dto);
 
     void delete(String uuid);
+
+    boolean checkIfLoginExists(MatchCreateDto dto);
 }
