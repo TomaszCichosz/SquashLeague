@@ -13,5 +13,4 @@ interface MatchRepository extends CrudRepository<Match, Long> {
     Match findOneByUuid(String uuid);
 
     void deleteByUuid(String uuid);
-
 }
