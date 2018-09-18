@@ -16,4 +16,12 @@ public class UserFacade {
     public User getUserByUuid(String uuid) {
         return userRepository.findOneByUuid(uuid);
     }
+
+    public User getUserByLogin(String login) {
+        return userRepository.findOneByLogin(login);
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 }
