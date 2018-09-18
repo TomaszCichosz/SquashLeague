@@ -1,6 +1,7 @@
 package com.groupproject.user;
 
 import com.groupproject.commons.BaseEntity;
+import com.groupproject.game.Game;
 import com.groupproject.match.Match;
 
 import javax.persistence.*;
@@ -97,5 +98,17 @@ public class User extends BaseEntity {
 
     public Set<Match> getGamesAsGuest() {
         return gamesAsGuest;
+    }
+
+    public void addGameAsHost(Match match) {
+        gamesAsHost.add(match);
+    }
+
+    public void addGameAsGuest(Match match) {
+        gamesAsGuest.add(match);
+    }
+
+    public void setRanking(Integer ranking) {
+        this.ranking = ranking;
     }
 }
