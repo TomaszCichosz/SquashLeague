@@ -30,8 +30,10 @@ public class MatchFacade {
 
     public Set<Game> getGames(String matchUuid, int[] hostResult, int[] guestResult) {
         Set<Game> games = new HashSet<>();
+        int gameNumber = 1;
         for (int i = 0; i < hostResult.length; i++) {
-            games.add(gameFacade.getGame(matchUuid, ++i, hostResult[i], guestResult[i]));
+            games.add(gameFacade.getGame(matchUuid, gameNumber, hostResult[i], guestResult[i]));
+            gameNumber++;
         }
         return games;
     }
