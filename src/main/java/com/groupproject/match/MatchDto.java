@@ -1,25 +1,23 @@
 package com.groupproject.match;
 
-import com.groupproject.user.User;
-
 class MatchDto {
 
-    private String hostUuid;
-    private String guestUuid;
+    private String hostLogin;
+    private String guestLogin;
 
     public MatchDto() {
     }
 
     public MatchDto(Match match) {
-        this.hostUuid = match.getHost().getUuid();
-        this.guestUuid = match.getGuest().getUuid();
+        this.hostLogin = match.getHost().getLogin();
+        this.guestLogin = match.getGuest().getLogin();
     }
 
-    public String getHostUuid() {
-        return hostUuid;
+    public String getHostLogin() {
+        return hostLogin;
     }
 
-    public String getGuestUuid() {
-        return guestUuid;
+    public String getGuestLogin() {
+        return guestLogin;
     }
 }

@@ -1,25 +1,55 @@
 package com.groupproject.match;
 
-import com.groupproject.user.User;
-
 class MatchCreateDto {
 
-    private String hostUuid;
-    private String guestUuid;
+    private String hostLogin;
+    private String guestLogin;
+    private int[] hostResult;
+    private int[] guestResult;
 
     public MatchCreateDto() {
     }
 
-    public MatchCreateDto(String hostUuid, String guestUuid) {
-        this.hostUuid = hostUuid;
-        this.guestUuid = guestUuid;
+    public MatchCreateDto(String hostLogin, String guestLogin, int[] hostResult, int[] guestResult) {
+        this.hostLogin = hostLogin;
+        this.guestLogin = guestLogin;
+        this.hostResult = hostResult;
+        this.guestResult = guestResult;
     }
 
-    public String getHostUuid() {
-        return hostUuid;
+    public String getHostLogin() {
+        return hostLogin;
     }
 
-    public String getGuestUuid() {
-        return guestUuid;
+    public MatchCreateDto setHostLogin(String hostLogin) {
+        this.hostLogin = hostLogin;
+        return this;
+    }
+
+    public String getGuestLogin() {
+        return guestLogin;
+    }
+
+    public MatchCreateDto setGuestLogin(String guestLogin) {
+        this.guestLogin = guestLogin;
+        return this;
+    }
+
+    public int[] getHostResult() {
+        return hostResult;
+    }
+
+    public MatchCreateDto setHostResult(int[] hostResult) {
+        this.hostResult = hostResult;
+        return this;
+    }
+
+    public int[] getGuestResult() {
+        return guestResult;
+    }
+
+    public MatchCreateDto setGuestResult(int[] guestResult) {
+        this.guestResult = guestResult;
+        return this;
     }
 }
