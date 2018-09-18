@@ -9,10 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "matches")
 public class Match extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private User host;
@@ -49,5 +50,9 @@ public class Match extends BaseEntity {
 
     public Set<Game> getGames() {
         return games;
+    }
+
+    public void addGame(Game game) {
+        games.add(game);
     }
 }
