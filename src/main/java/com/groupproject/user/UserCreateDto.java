@@ -35,4 +35,34 @@ class UserCreateDto {
     public Integer getStartingRanking() {
         return startingRanking;
     }
+
+    public UserCreateDto setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public UserCreateDto setSurname(String surname) {
+        this.surname = surname;
+        return this;
+    }
+
+    public UserCreateDto setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public UserCreateDto setLogin(String login) {
+        this.login = login;
+        return this;
+    }
+
+    public UserCreateDto setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public UserCreateDto setStartingRanking(Integer startingRanking) {
+        this.startingRanking = startingRanking;
+        return this;
+    }
 }
