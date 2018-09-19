@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/api/players")
-public class PlayerController {
+class PlayerController {
 
     private PlayerService playerService;
 
