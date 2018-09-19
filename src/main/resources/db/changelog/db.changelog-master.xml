@@ -114,4 +114,86 @@
         </addColumn>
     </changeSet>
 
+
+
+    <changeSet author="Tomasz Cichosz" id="215123-dropForeignKeyConstraint-MatchToUser">
+        <dropForeignKeyConstraint baseTableName="matches" constraintName="FK74qkq9n50vrmi7hboof9nue8w"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="523452-dropForeignKeyConstraint-MatchToUser">
+        <dropForeignKeyConstraint baseTableName="matches" constraintName="FKnyj2e75bppbg6t8sc7xtikn7w"/>
+    </changeSet>
+
+    <changeSet author="Tomasz Cichosz" id="467789-dropColumn-user">
+        <dropColumn tableName="user" columnName="games_lost"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="568569-dropColumn-user">
+        <dropColumn tableName="user" columnName="games_won"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="7634569-dropColumn-user">
+        <dropColumn tableName="user" columnName="name"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="3457236-dropColumn-user">
+        <dropColumn tableName="user" columnName="surname"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="dropColumn-user">
+        <dropColumn tableName="user" columnName="ranking"/>
+    </changeSet>
+
+    <changeSet author="Tomasz Cichosz" id="5234523-createTable-player">
+        <createTable tableName="player">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="elo_rating" type="INT"/>
+            <column name="games_won" type="INT"/>
+            <column name="games_lost" type="INT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="345625-uniqueConstraint-player">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_snrgs02jawef9204242jgsdre" tableName="player"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="2634234623-index-player">
+        <createIndex indexName="FK0a9diqopkvamdmv414752q5sera2" tableName="player">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="45634563457-index-player">
+        <createIndex indexName="UK_ergshs4nmjhla90a03rf3a7549a1" tableName="player">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Tomasz Cichosz" id="3645733-addForeignKeyConstraint-MatchToPlayer">
+        <addForeignKeyConstraint baseColumnNames="guest_id"
+                                 baseTableName="matches"
+                                 constraintName="FKdhthdrthd6434s34235w34w"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="4568548-addForeignKeyConstraint-MatchToPlayer">
+        <addForeignKeyConstraint baseColumnNames="host_id"
+                                 baseTableName="matches"
+                                 constraintName="FKserg89y34towi3g92093sergh5"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="2345234-addForeignKeyConstraint-PlayerToUser">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="player"
+                                 constraintName="FK0a9diqopkvamdmv414752q5sera2"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+
 </databaseChangeLog>
