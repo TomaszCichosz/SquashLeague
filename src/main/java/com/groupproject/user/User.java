@@ -22,10 +22,10 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    public User(String email, String login, String password) {
-        this.email = email;
+    public User(String login, String password, String email) {
         this.login = login;
         this.password = password;
+        this.email = email;
     }
 
     public User(Long id, String email, String login, String password) {
@@ -49,5 +49,9 @@ public class User extends BaseEntity {
 
     public String getPassword() {
         return password;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

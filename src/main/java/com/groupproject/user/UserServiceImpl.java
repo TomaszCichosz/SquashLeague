@@ -1,5 +1,6 @@
 package com.groupproject.user;
 
+import com.groupproject.player.PlayerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private PlayerFacade playerFacade;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -30,9 +32,10 @@ class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(UserCreateDto dto) {
-        User user = new User(dto.getName(), dto.getSurname(),
-                dto.getEmail(), dto.getLogin(), dto.getPassword(), dto.getStartingRanking());
-        return new UserDto(userRepository.save(user));
+        User user = new User(dto.getLogin(), dto.getPassword(), dto.getEmail());
+        userRepository.save(user);
+        playerFacade.createPlayer(user.getUuid());
+        return new UserDto(user);
     }
 
     @Override
