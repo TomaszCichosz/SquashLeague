@@ -40,6 +40,6 @@ class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void delete(String uuid) {
-        //TODO playerRepository.findOneByUuid(uuid).setDeleted(true);
+        playerRepository.findOneByUuid(uuid).setDeleted(true);
     }
 }
