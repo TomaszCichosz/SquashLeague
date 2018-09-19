@@ -64,6 +64,14 @@ class MatchServiceImpl implements MatchService {
         host.setEloRating(ratings[0]);
         guest.setEloRating(ratings[1]);
 
+        if (matchScore.charAt(0) > matchScore.charAt(2)) {
+            host.addOneToGamesWon();
+            guest.addOneToGamesLost();
+        } else {
+            host.addOneToGamesLost();
+            guest.addOneToGamesWon();
+        }
+
         playerFacade.savePlayer(host);
         playerFacade.savePlayer(guest);
 
