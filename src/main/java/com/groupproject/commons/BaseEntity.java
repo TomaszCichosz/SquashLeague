@@ -60,6 +60,4 @@ public abstract class BaseEntity {
     public int hashCode() {
         return uuid.hashCode();
     }
-
-
 }
