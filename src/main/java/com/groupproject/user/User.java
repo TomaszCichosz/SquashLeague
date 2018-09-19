@@ -16,7 +16,7 @@ public class User extends BaseEntity {
     private String password;
     private String email;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     private Player player;
 
     public User() {
