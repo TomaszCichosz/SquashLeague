@@ -13,9 +13,9 @@ public abstract class BaseEntity {
 
     @Column(unique = true)
     private String uuid = UUID.randomUUID().toString();
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private boolean deleted=false;
 
     @PrePersist
     public void prePersist() {
@@ -39,6 +39,10 @@ public abstract class BaseEntity {
         return updatedAt;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,4 +55,6 @@ public abstract class BaseEntity {
     public int hashCode() {
         return uuid.hashCode();
     }
+
+
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="User (generated)" id="1537371637328-1">
         <createTable tableName="game">
             <column autoIncrement="true" name="id" type="BIGINT">
@@ -97,6 +96,22 @@
                                  constraintName="FKnyj2e75bppbg6t8sc7xtikn7w" deferrable="false"
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="brozek95" id="00000000001">
+        <addColumn tableName="game">
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="brozek95" id="00000000002">
+        <addColumn tableName="user">
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+            </column>
+        </addColumn>
+        <addColumn tableName="matches">
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+            </column>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>
