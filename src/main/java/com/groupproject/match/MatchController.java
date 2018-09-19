@@ -23,17 +23,25 @@ class MatchController {
         return matchService.findAll();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{uuid}")
+    @ResponseBody
     public void deleteUser(@PathVariable String uuid) {
         matchService.delete(uuid);
     }
 
+//    @PostMapping
+//    public String create(@ModelAttribute MatchCreateDto dto) {
+//        if (!matchService.checkIfLoginExists(dto)) {
+//            return "error";
+//        }
+//        matchService.create(dto);
+//        return "add-game";
+//    }
+
     @PostMapping
-    public String create(@ModelAttribute MatchCreateDto dto) {
-        if (!matchService.checkIfLoginExists(dto)) {
-            return "error";
-        }
-        matchService.create(dto);
-        return "add-game";
+    @ResponseBody
+    public MatchDto create(@RequestBody MatchCreateDto dto) {
+        return matchService.create(dto);
     }
+
 }

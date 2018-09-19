@@ -30,6 +30,7 @@ class UserController {
     }
 
     @DeleteMapping("/{uuid}")
+    @ResponseBody
     public void deleteUser(@PathVariable String uuid) {
         userService.delete(uuid);
     }
