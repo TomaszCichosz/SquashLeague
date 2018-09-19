@@ -1,7 +1,6 @@
 package com.groupproject.user;
 
 import com.groupproject.commons.BaseEntity;
-import com.groupproject.game.Game;
 import com.groupproject.match.Match;
 
 import javax.persistence.*;
@@ -24,9 +23,10 @@ public class User extends BaseEntity {
     private Integer gamesWon;
     private Integer gamesLost;
 
-    @OneToMany(mappedBy = "host")
+
+    @OneToMany(mappedBy = "host", cascade = CascadeType.REMOVE)
     private Set<Match> gamesAsHost = new HashSet<>();
-    @OneToMany(mappedBy = "guest")
+    @OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
     private Set<Match> gamesAsGuest = new HashSet<>();
 
 
