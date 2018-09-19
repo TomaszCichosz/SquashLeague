@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="User (generated)" id="1537371637328-1">
+        <createTable tableName="game">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="game_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="guest_result" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="host_result" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="match_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-2">
+        <createTable tableName="matches">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="guest_id" type="BIGINT"/>
+            <column name="host_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-3">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="games_lost" type="INT"/>
+            <column name="games_won" type="INT"/>
+            <column name="login" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="ranking" type="INT"/>
+            <column name="surname" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-4">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_1xc1iry6gqjrvh5cpajiq7l2f" tableName="user"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-5">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_3ltdjxuk5rta9yh6w66n0asq1" tableName="matches"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-6">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_551oy8mny7aga9g2rfi2gr7hg" tableName="game"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-7">
+        <addUniqueConstraint columnNames="login" constraintName="UK_ew1hvam8uwaknuaellwhqchhb" tableName="user"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-8">
+        <createIndex indexName="FK74qkq9n50vrmi7hboof9nue8w" tableName="matches">
+            <column name="host_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-9">
+        <createIndex indexName="FKmhetr296uk34maafesd4iho3u" tableName="game">
+            <column name="match_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-10">
+        <createIndex indexName="FKnyj2e75bppbg6t8sc7xtikn7w" tableName="matches">
+            <column name="guest_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-11">
+        <addForeignKeyConstraint baseColumnNames="host_id" baseTableName="matches"
+                                 constraintName="FK74qkq9n50vrmi7hboof9nue8w" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-12">
+        <addForeignKeyConstraint baseColumnNames="match_id" baseTableName="game"
+                                 constraintName="FKmhetr296uk34maafesd4iho3u" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="matches"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-13">
+        <addForeignKeyConstraint baseColumnNames="guest_id" baseTableName="matches"
+                                 constraintName="FKnyj2e75bppbg6t8sc7xtikn7w" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+
+</databaseChangeLog>
