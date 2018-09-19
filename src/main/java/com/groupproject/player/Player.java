@@ -12,7 +12,7 @@ import java.util.Set;
 public class Player extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int eloRating;
     private int gamesWon;
