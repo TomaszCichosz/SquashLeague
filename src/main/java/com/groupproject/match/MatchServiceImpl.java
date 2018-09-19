@@ -2,7 +2,10 @@ package com.groupproject.match;
 
 import com.groupproject.elorating.EloRatingFacade;
 import com.groupproject.game.Game;
+import com.groupproject.player.Player;
+import com.groupproject.player.PlayerFacade;
 import com.groupproject.user.User;
+import com.groupproject.user.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +20,15 @@ class MatchServiceImpl implements MatchService {
 
     private MatchRepository matchRepository;
     private MatchFacade matchFacade;
+    private UserFacade userFacade;
     private EloRatingFacade eloRatingFacade;
+    private PlayerFacade playerFacade;
 
     @Autowired
-    public MatchServiceImpl(MatchRepository matchRepository, MatchFacade matchFacade, EloRatingFacade eloRatingFacade) {
+    public MatchServiceImpl(MatchRepository matchRepository, MatchFacade matchFacade, UserFacade userFacade, EloRatingFacade eloRatingFacade) {
         this.matchRepository = matchRepository;
         this.matchFacade = matchFacade;
+        this.userFacade = userFacade;
         this.eloRatingFacade = eloRatingFacade;
     }
 
@@ -40,8 +46,8 @@ class MatchServiceImpl implements MatchService {
 
     @Override
     public MatchDto create(MatchCreateDto dto) {
-        Match match = new Match(matchFacade.getUserByLogin(dto.getHostLogin()),
-                matchFacade.getUserByLogin(dto.getGuestLogin()));
+        Match match = new Match(userFacade.getUserByLogin(dto.getHostLogin()).getPlayer(),
+                userFacade.getUserByLogin(dto.getGuestLogin()).getPlayer());
         matchRepository.save(match);
 
         Set<Game> games = matchFacade.getGames(match.getUuid(), dto.getHostResult(), dto.getGuestResult());
@@ -50,16 +56,16 @@ class MatchServiceImpl implements MatchService {
         }
         match = matchRepository.save(match);
 
-        User host = match.getHost();
-        User guest = match.getGuest();
+        Player host = match.getHost();
+        Player guest = match.getGuest();
 
         String matchScore = convertArrayOfResultsToScore(dto.getHostResult(), dto.getGuestResult());
         int[] ratings = eloRatingFacade.getNewRating(host, guest, matchScore);
-        host.setRanking(ratings[0]);
-        guest.setRanking(ratings[1]);
+        host.setEloRating(ratings[0]);
+        guest.setEloRating(ratings[1]);
 
-        matchFacade.saveUser(host);
-        matchFacade.saveUser(guest);
+        playerFacade.savePlayer(host);
+        playerFacade.savePlayer(guest);
 
         return new MatchDto(match);
     }
@@ -71,7 +77,7 @@ class MatchServiceImpl implements MatchService {
 
     @Override
     public boolean checkIfLoginExists(MatchCreateDto dto) {
-        return matchFacade.getUserByLogin(dto.getGuestLogin()) != null;
+        return userFacade.getUserByLogin(dto.getGuestLogin()) != null;
     }
 
     private String convertArrayOfResultsToScore(int[] hostResults, int[] guestResults) {

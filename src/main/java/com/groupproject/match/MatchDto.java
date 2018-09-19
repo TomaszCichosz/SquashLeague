@@ -9,8 +9,8 @@ class MatchDto {
     }
 
     public MatchDto(Match match) {
-        this.hostLogin = match.getHost().getLogin();
-        this.guestLogin = match.getGuest().getLogin();
+        this.hostLogin = match.getHost().getUser().getLogin();
+        this.guestLogin = match.getGuest().getUser().getLogin();
     }
 
     public String getHostLogin() {
