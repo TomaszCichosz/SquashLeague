@@ -10,5 +10,5 @@ interface UserService {
 
     UserDto create(UserCreateDto userCreateDto);
 
-    void delete(String uuid);
+    void deletedAsTrue(String uuid);
 }
