@@ -29,9 +29,9 @@ class UserController {
         return userService.findAll();
     }
 
-    @DeleteMapping("/{uuid}")
+    @PostMapping
     @ResponseBody
     public void deleteUser(@PathVariable String uuid) {
-        userService.delete(uuid);
+        userService.deletedAsTrue(uuid);
     }
 }

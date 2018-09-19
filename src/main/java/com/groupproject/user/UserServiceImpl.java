@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,7 +40,8 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(String uuid) {
-        userRepository.deleteByUuid(uuid);
+    public void deletedAsTrue(String uuid) {
+        userRepository.findOneByUuid(uuid).setDeleted(true);
     }
+
 }

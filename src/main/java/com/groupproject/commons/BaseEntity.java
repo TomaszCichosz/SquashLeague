@@ -43,6 +43,11 @@ public abstract class BaseEntity {
         return deleted;
     }
 
+    public BaseEntity setDeleted(boolean deleted) {
+        this.deleted = deleted;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

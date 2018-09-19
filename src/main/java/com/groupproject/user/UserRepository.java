@@ -8,6 +8,8 @@ import java.util.Set;
 @Repository
 interface UserRepository extends CrudRepository<User, Long> {
 
+    Set<User>findAllByDeletedFalse();
+
     Set<User> findAll();
 
     User findOneByUuid(String uuid);
