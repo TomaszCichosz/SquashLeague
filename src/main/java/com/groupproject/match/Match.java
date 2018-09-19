@@ -2,7 +2,7 @@ package com.groupproject.match;
 
 import com.groupproject.commons.BaseEntity;
 import com.groupproject.game.Game;
-import com.groupproject.user.User;
+import com.groupproject.player.Player;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,21 +16,21 @@ public class Match extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private User host;
+    private Player host;
     @ManyToOne
-    private User guest;
+    private Player guest;
     @OneToMany(mappedBy = "match",cascade = CascadeType.REMOVE)
     private Set<Game> games = new HashSet<>();
 
     public Match() {
     }
 
-    public Match(User host, User guest) {
+    public Match(Player host, Player guest) {
         this.host = host;
         this.guest = guest;
     }
 
-    public Match(Long id, User host, User guest) {
+    public Match(Long id, Player host, Player guest) {
         this.id = id;
         this.host = host;
         this.guest = guest;
@@ -40,11 +40,11 @@ public class Match extends BaseEntity {
         return id;
     }
 
-    public User getHost() {
+    public Player getHost() {
         return host;
     }
 
-    public User getGuest() {
+    public Player getGuest() {
         return guest;
     }
 
