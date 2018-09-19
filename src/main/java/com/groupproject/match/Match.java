@@ -19,7 +19,7 @@ public class Match extends BaseEntity {
     private User host;
     @ManyToOne
     private User guest;
-    @OneToMany(mappedBy = "match",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "match")
     private Set<Game> games = new HashSet<>();
 
     public Match() {

@@ -24,9 +24,9 @@ public class User extends BaseEntity {
     private Integer gamesLost;
 
 
-    @OneToMany(mappedBy = "host", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "host")
     private Set<Match> gamesAsHost = new HashSet<>();
-    @OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "guest")
     private Set<Match> gamesAsGuest = new HashSet<>();
 
 
