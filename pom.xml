@@ -96,6 +96,11 @@
             <artifactId>jquery</artifactId>
             <version>2.1.4</version>
         </dependency>
+        <!--Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
