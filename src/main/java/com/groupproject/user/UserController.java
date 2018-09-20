@@ -17,12 +17,6 @@ class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    @ResponseBody
-    public UserDto createUser(@RequestBody UserCreateDto userCreateDto) {
-        return userService.create(userCreateDto);
-    }
-
     @GetMapping
     @ResponseBody
     public List<UserDto> findAllUsers() {
@@ -33,5 +27,15 @@ class UserController {
     @ResponseBody
     public void deleteUser(@PathVariable String uuid) {
         userService.deletedAsTrue(uuid);
+    }
+
+    @GetMapping("/me")
+    public String welcome() {
+        return "index";
+    }
+
+    @PutMapping
+    public UserDto register(@ModelAttribute UserRegistrationDto dto) {
+        return userService.register(dto);
     }
 }
