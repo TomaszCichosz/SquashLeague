@@ -115,7 +115,6 @@
     </changeSet>
 
 
-
     <changeSet author="Tomasz Cichosz" id="215123-dropForeignKeyConstraint-MatchToUser">
         <dropForeignKeyConstraint baseTableName="matches" constraintName="FK74qkq9n50vrmi7hboof9nue8w"/>
     </changeSet>
@@ -194,6 +193,48 @@
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
                                  referencedTableName="user"/>
+    </changeSet>
+
+
+    <changeSet author="brozek95" id="00000000004">
+        <createTable tableName="token">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="token" type="VARCHAR(255)"/>
+            <column name="expired" type="boolean"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="brozek95" id="00000000005">
+        <addUniqueConstraint columnNames="uuid" constraintName="unique_uuid" tableName="token"/>
+    </changeSet>
+    <changeSet author="brozek95" id="00000000006">
+        <createIndex indexName="user_id_index" tableName="player">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="brozek95" id="00000000007">
+        <createIndex indexName="uuid_index" tableName="player">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="brozek95" id="00000000008">
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="token"
+                constraintName="fk_token_user"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"/>
     </changeSet>
 
 </databaseChangeLog>
