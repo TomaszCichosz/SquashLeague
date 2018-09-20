@@ -17,4 +17,6 @@ interface UserRepository extends CrudRepository<User, Long> {
     void deleteByUuid(String uuid);
 
     User findOneByLogin(String login);
+
+    boolean existsByLogin(String login);
 }
