@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,10 +27,12 @@ class PlayerController {
 
     @GetMapping("/ranking")
     public String getRankingView(Model model) {
+        List<LoginAndRatingDto> loginsAndRatings = new ArrayList<>();
         for (PlayerDto playerDto : playerService.findAll()) {
-            model.addAttribute("playerWithRating", new LoginAndRatingDto(
+            loginsAndRatings.add(new LoginAndRatingDto(
                     playerDto.getUserLogin(), playerDto.getEloRating()));
         }
+        model.addAttribute("loginsAndRatings", loginsAndRatings);
         return "ranking";
     }
 }
