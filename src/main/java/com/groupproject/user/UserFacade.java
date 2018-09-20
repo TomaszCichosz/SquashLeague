@@ -1,6 +1,7 @@
 package com.groupproject.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,6 +24,10 @@ public class UserFacade {
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    public UserDetailsServiceImpl getUserDetailsServiceImpl(){
+        return new UserDetailsServiceImpl(userRepository);
     }
 
 
