@@ -4,7 +4,6 @@ import com.groupproject.elorating.EloRatingFacade;
 import com.groupproject.game.Game;
 import com.groupproject.player.Player;
 import com.groupproject.player.PlayerFacade;
-import com.groupproject.user.User;
 import com.groupproject.user.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +24,12 @@ class MatchServiceImpl implements MatchService {
     private PlayerFacade playerFacade;
 
     @Autowired
-    public MatchServiceImpl(MatchRepository matchRepository, MatchFacade matchFacade, UserFacade userFacade, EloRatingFacade eloRatingFacade) {
+    public MatchServiceImpl(MatchRepository matchRepository, MatchFacade matchFacade, UserFacade userFacade, EloRatingFacade eloRatingFacade, PlayerFacade playerFacade) {
         this.matchRepository = matchRepository;
         this.matchFacade = matchFacade;
         this.userFacade = userFacade;
         this.eloRatingFacade = eloRatingFacade;
+        this.playerFacade = playerFacade;
     }
 
     @Override
