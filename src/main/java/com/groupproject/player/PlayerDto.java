@@ -3,6 +3,7 @@ package com.groupproject.player;
 class PlayerDto {
 
     private String uuid;
+    private String userLogin;
     private int eloRating;
     private int gamesWon;
     private int gamesLost;
@@ -15,6 +16,7 @@ class PlayerDto {
         eloRating = player.getEloRating();
         gamesWon = player.getGamesWon();
         gamesLost = player.getGamesLost();
+        userLogin = player.getUser().getLogin();
     }
 
     public String getUuid() {
@@ -31,5 +33,9 @@ class PlayerDto {
 
     public int getGamesLost() {
         return gamesLost;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
     }
 }
