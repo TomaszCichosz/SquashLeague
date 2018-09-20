@@ -1,5 +1,6 @@
-package com.groupproject.user;
+package com.groupproject.configuration;
 
+import com.groupproject.user.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserRepository userRepository;
+    private UserFacade userFacade;
 
     @Autowired
-    public SecurityConfig(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SecurityConfig(UserFacade userFacade) {
+        this.userFacade = userFacade;
     }
 
     @Override
@@ -53,11 +54,12 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl(userRepository);
+        return userFacade.getUserDetailsServiceImpl();
     }
 
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
+
 }
