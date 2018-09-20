@@ -14,6 +14,7 @@ class UserDto {
         this.email = user.getEmail();
         this.login = user.getLogin();
         this.password = user.getPassword();
+        this.uuid = user.getUuid();
     }
 
     public String getUuid() {

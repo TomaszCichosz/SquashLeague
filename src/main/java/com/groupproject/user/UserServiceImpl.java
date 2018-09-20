@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,8 +16,9 @@ class UserServiceImpl implements UserService {
     private PlayerFacade playerFacade;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PlayerFacade playerFacade) {
         this.userRepository = userRepository;
+        this.playerFacade = playerFacade;
     }
 
     @Override
