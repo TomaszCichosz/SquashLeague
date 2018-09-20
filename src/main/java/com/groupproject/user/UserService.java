@@ -8,7 +8,7 @@ interface UserService {
 
     UserDto findOneByUuid(String uuid);
 
-    UserDto create(UserCreateDto userCreateDto);
-
     void deletedAsTrue(String uuid);
+
+    UserDto register(UserRegistrationDto dto);
 }

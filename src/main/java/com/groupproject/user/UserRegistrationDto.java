@@ -1,19 +1,19 @@
 package com.groupproject.user;
 
-class UserCreateDto {
+class UserRegistrationDto {
 
     private String email;
     private String login;
     private String password;
 
-    public UserCreateDto() {
+    public UserRegistrationDto() {
     }
 
     public String getEmail() {
         return email;
     }
 
-    public UserCreateDto setEmail(String email) {
+    public UserRegistrationDto setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -22,7 +22,7 @@ class UserCreateDto {
         return login;
     }
 
-    public UserCreateDto setLogin(String login) {
+    public UserRegistrationDto setLogin(String login) {
         this.login = login;
         return this;
     }
@@ -31,8 +31,10 @@ class UserCreateDto {
         return password;
     }
 
-    public UserCreateDto setPassword(String password) {
+    public UserRegistrationDto setPassword(String password) {
         this.password = password;
         return this;
     }
+
+
 }

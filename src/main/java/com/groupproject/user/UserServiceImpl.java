@@ -2,6 +2,7 @@ package com.groupproject.user;
 
 import com.groupproject.player.PlayerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +15,13 @@ class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private PlayerFacade playerFacade;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PlayerFacade playerFacade) {
+    public UserServiceImpl(UserRepository userRepository, PlayerFacade playerFacade, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.playerFacade = playerFacade;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -31,17 +34,27 @@ class UserServiceImpl implements UserService {
         return new UserDto(userRepository.findOneByUuid(uuid));
     }
 
-    @Override
-    public UserDto create(UserCreateDto dto) {
-        User user = new User(dto.getLogin(), dto.getPassword(), dto.getEmail());
-        userRepository.save(user);
-        playerFacade.createPlayer(user.getUuid());
-        return new UserDto(user);
-    }
+//    @Override
+//    public UserDto create(UserRegistrationDto dto) {
+//        User user = new User(dto.getLogin(), dto.getPassword(), dto.getEmail());
+//        userRepository.save(user);
+//        playerFacade.createPlayer(user.getUuid());
+//        return new UserDto(user);
+//    }
 
     @Override
     public void deletedAsTrue(String uuid) {
         userRepository.findOneByUuid(uuid).setDeleted(true);
     }
 
+    @Override
+    public UserDto register(UserRegistrationDto dto) {
+        if (userRepository.existsByLogin(dto.getLogin())) {
+            throw new RuntimeException("User already exists");
+        }
+        User user=new User(dto.getLogin(),passwordEncoder.encode(dto.getPassword()),dto.getEmail());
+        userRepository.save(user);
+        playerFacade.createPlayer(user.getUuid());
+        return new UserDto(user);
+    }
 }
