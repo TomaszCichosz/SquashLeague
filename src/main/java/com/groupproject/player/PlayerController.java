@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -32,7 +33,14 @@ class PlayerController {
             loginsAndRatings.add(new LoginAndRatingDto(
                     playerDto.getUserLogin(), playerDto.getEloRating()));
         }
+        Collections.sort(loginsAndRatings);
         model.addAttribute("loginsAndRatings", loginsAndRatings);
         return "ranking";
+    }
+
+    @GetMapping("/opponents")
+    public String getPlayersOpponents(Model model) {
+        //TODO fields: opponentLogin oppRating lost/wonAgainst
+        return "opponents";
     }
 }
