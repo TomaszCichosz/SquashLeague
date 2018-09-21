@@ -26,8 +26,8 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/api**").permitAll()
-                .antMatchers("/index.html").permitAll()
+                .antMatchers("/api.**").permitAll()
+                .antMatchers("/home.html").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .headers().frameOptions().disable()
@@ -35,18 +35,18 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable();
 
         http.formLogin()
-                .loginPage("/users/login")
-                .failureHandler((req, resp, e) -> resp.sendError(HttpStatus.BAD_REQUEST.value(), "Username or password invalid"))
+                .loginPage("/index")
+                .failureHandler((req, resp, e) -> resp.sendError(HttpStatus.BAD_REQUEST.value(), "Invalid username or password"))
                 .usernameParameter("login")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/api/users/me")
+                .defaultSuccessUrl("/users/home")
                 .permitAll();
 
         http.logout()
                 .logoutUrl("users/logout")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
-                .logoutSuccessUrl("/logout.html")
+                .logoutSuccessUrl("/index")
                 .permitAll();
 
     }
