@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/users")
 class UserController {
 
     private UserService userService;
@@ -23,13 +22,13 @@ class UserController {
         return userService.findAll();
     }
 
-    @PostMapping("/{uuid}")
+    @PostMapping("/users/{uuid}")
     @ResponseBody
     public void deleteUser(@PathVariable String uuid) {
         userService.deletedAsTrue(uuid);
     }
 
-    @GetMapping("/me")
+    @GetMapping("/users/me")
     public String welcome() {
         return "index";
     }

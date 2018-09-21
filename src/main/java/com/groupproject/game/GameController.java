@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/games")
 class GameController {
 
     private GameService gameService;
@@ -28,12 +27,4 @@ class GameController {
     public GameDto createGame(@RequestBody GameCreateDto createDto){
         return gameService.create(createDto);
     }
-
-    @DeleteMapping("/{uuid}")
-    public void deleteGame(@PathVariable String uuid){
-        gameService.delete(uuid);
-    }
-
-
-
 }

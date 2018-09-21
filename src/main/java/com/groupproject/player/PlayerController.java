@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/players")
 class PlayerController {
 
     private PlayerService playerService;
@@ -25,7 +24,7 @@ class PlayerController {
         return playerService.findAll();
     }
 
-    @GetMapping("/ranking")
+    @GetMapping("/players/ranking")
     public String getRankingView(Model model) {
         List<LoginAndRatingDto> loginsAndRatings = new ArrayList<>();
         for (PlayerDto playerDto : playerService.findAll()) {
