@@ -1,53 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head lang="en" th:fragment="head">
-<title>Squash League All Players</title>
+<head lang="en">
+    <title>Join us</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<!--     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen" /> -->
+          rel="stylesheet" media="screen"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
-
-<!--     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
     <link href="../static/css/stylesheet.css"
-          th:href="@{/css/stylesheet.css}" rel="stylesheet" media="screen"/> -->
+          th:href="@{/css/stylesheet.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
 <div class="container">
     <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-               <h1>Register User</h1>
-            </div>  
-            <div class="col-md-4"></div>                      
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h1>Register User</h1>
+        </div>
+        <div class="col-md-4"></div>
     </div>
     <div class="row">
         <div class="col-md-4"></div>
-        
+
         <div class="col-md-4 form-group">
-             <form action="/registeruser.html">
-              <div class="form-group">
-                <label for="login">Login:</label>
-                <input type="text" class="form-control" id="login" placeholder="Enter login">
-              </div>                                            
-              <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email" placeholder="Email address">
-              </div>
-              <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Password">
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>  
+            <form action="#" th:action="@{/users/index}" th:object="${dto}" th:method="put">
+                <div class="form-group">
+                    <label for="login">Login:</label>
+                    <input type="text" class="form-control" id="login" placeholder="Enter login" th:field="*{login}"/>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email address" th:field="*{email}"/>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Password" th:field="*{password}"/>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
 
         <div class="col-md-4"></div>

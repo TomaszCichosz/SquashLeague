@@ -1,7 +1,9 @@
 package com.groupproject.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,13 +31,27 @@ class UserController {
         userService.deletedAsTrue(uuid);
     }
 
-    @GetMapping("/me")
-    public String welcome() {
+    @GetMapping("/home")
+    public String welcome(Model model) {
+        model.addAttribute("name",SecurityContextHolder.getContext().getAuthentication().getName());
+        return "home";
+    }
+
+    @PutMapping("/index")
+    public String register(@ModelAttribute UserRegistrationDto dto) {
+        userService.register(dto);
         return "index";
     }
 
-    @PutMapping
-    public UserDto register(@ModelAttribute UserRegistrationDto dto) {
-        return userService.register(dto);
+    @GetMapping("adduser")
+    public String addUserView(Model model) {
+        model.addAttribute("dto", new UserRegistrationDto());
+        return "adduser";
+    }
+
+    @GetMapping("/logout")
+    public String logoutUser(){
+        SecurityContextHolder.clearContext();
+        return "index";
     }
 }

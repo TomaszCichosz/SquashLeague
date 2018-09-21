@@ -34,14 +34,6 @@ class UserServiceImpl implements UserService {
         return new UserDto(userRepository.findOneByUuid(uuid));
     }
 
-//    @Override
-//    public UserDto create(UserRegistrationDto dto) {
-//        User user = new User(dto.getLogin(), dto.getPassword(), dto.getEmail());
-//        userRepository.save(user);
-//        playerFacade.createPlayer(user.getUuid());
-//        return new UserDto(user);
-//    }
-
     @Override
     public void deletedAsTrue(String uuid) {
         userRepository.findOneByUuid(uuid).setDeleted(true);
