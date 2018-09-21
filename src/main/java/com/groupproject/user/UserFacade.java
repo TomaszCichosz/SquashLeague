@@ -30,5 +30,8 @@ public class UserFacade {
         return new UserDetailsServiceImpl(userRepository);
     }
 
+    public UserRegistrationDto getUserRegistrationDto(){
+        return new UserRegistrationDto();
+    }
 
 }
