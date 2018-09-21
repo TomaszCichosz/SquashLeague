@@ -20,10 +20,10 @@ public class Player extends BaseEntity {
 
     @OneToOne
     private User user;
-    @OneToMany(mappedBy = "host", cascade = CascadeType.REMOVE)
-    private Set<Match> gamesAsHost = new HashSet<>();
-    @OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
-    private Set<Match> gamesAsGuest = new HashSet<>();
+    @OneToMany(mappedBy = "host")
+    private Set<Match> matchesAsHost = new HashSet<>();
+    @OneToMany(mappedBy = "guest")
+    private Set<Match> matchesAsGuest = new HashSet<>();
 
     public Player() {
     }
@@ -62,12 +62,12 @@ public class Player extends BaseEntity {
         return user;
     }
 
-    public Set<Match> getGamesAsHost() {
-        return gamesAsHost;
+    public Set<Match> getMatchesAsHost() {
+        return matchesAsHost;
     }
 
-    public Set<Match> getGamesAsGuest() {
-        return gamesAsGuest;
+    public Set<Match> getMatchesAsGuest() {
+        return matchesAsGuest;
     }
 
     public void addOneToGamesWon() {
@@ -79,11 +79,11 @@ public class Player extends BaseEntity {
     }
 
     public void addGameAsHost(Match match) {
-        gamesAsHost.add(match);
+        matchesAsHost.add(match);
     }
 
     public void addGameAsGuest(Match match) {
-        gamesAsGuest.add(match);
+        matchesAsGuest.add(match);
     }
 
     public void setEloRating(int eloRating) {
