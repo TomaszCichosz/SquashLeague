@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
-public class TokenController {
+class TokenController {
 
     private TokenService tokenService;
 
@@ -19,10 +19,10 @@ public class TokenController {
     }
 
     @GetMapping("/passwords/reset/{login}")
-    public String getResetPasswordView(Model model, @PathVariable String login){
-        String token=tokenService.createToken(login);
-        model.addAttribute("token",token);
-        model.addAttribute("dto",new ResetPasswordDto());
+    public String getResetPasswordView(Model model, @PathVariable String login) {
+        String token = tokenService.createToken(login);
+        model.addAttribute("token", token);
+        model.addAttribute("dto", new ResetPasswordDto());
         return "reset-password";
     }
 
