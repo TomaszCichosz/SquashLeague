@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Add Match</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+   </head>
+   <body>
+      <h1>Add Match</h1>
+
+      <form action="#" th:action="@{/matches}" th:object="${dto}" method="POST">
+
+          <table>
+              <thead>
+                <tr>
+                    <td>Host: <input type="text" th:field="*{hostLogin}" /></td>
+                    <td>Guest: <input type="text" th:field="*{guestLogin}" /></td>
+                </tr>
+              </thead>
+
+              <tbody>
+              <tr th:each="guest, itemStat : ${dto.guestResult}">
+                  <td>Game no <label th:text="${itemStat.index+1}"></label>: <input th:field="${dto.hostResult[__${itemStat.index}__]}" /></td>
+                  <td><input th:field="${dto.guestResult[__${itemStat.index}__]}" /></td>
+              </tr>
+              </tbody>
+          </table>
+
+         <input type="submit" value="Add match" />
+      </form>
+
+      <br/>
+
+      <!-- Check if errorMessage is not null and not empty -->
+
+      <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         ...
+      </div>
+
+   </body>
+</html>
