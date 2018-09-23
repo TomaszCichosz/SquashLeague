@@ -29,7 +29,7 @@ class MatchController {
         MatchCreateDto dto = new MatchCreateDto();
         //TODO get id hosta and add to dto
         model.addAttribute("dto", dto);
-        return "addmatchTest";
+        return "addmatchform";
     }
 
     @PostMapping
@@ -39,7 +39,7 @@ class MatchController {
         }
         System.out.println("Added to database " + dto.toString());
         matchService.create(dto);
-        return "addmatchTest";
+        return "addedmatchform";
     }
 
     //TODO GET MATCH by uuid
