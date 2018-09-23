@@ -1,5 +1,7 @@
 package com.groupproject.match;
 
+import java.util.Arrays;
+
 class MatchCreateDto {
 
     private String hostLogin;
@@ -51,5 +53,15 @@ class MatchCreateDto {
     public MatchCreateDto setGuestResult(int[] guestResult) {
         this.guestResult = guestResult;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "MatchCreateDto{" +
+                "hostLogin='" + hostLogin + '\'' +
+                ", guestLogin='" + guestLogin + '\'' +
+                ", hostResult=" + Arrays.toString(hostResult) +
+                ", guestResult=" + Arrays.toString(guestResult) +
+                '}';
     }
 }
