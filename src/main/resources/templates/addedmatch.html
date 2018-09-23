@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Match</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+              th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+              rel="stylesheet" media="screen" /> -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+
+    <!--     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+                th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+        <link href="../static/css/stylesheet.css"
+              th:href="@{/css/stylesheet.css}" rel="stylesheet" media="screen"/> -->
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form action="#" th:action="@{/matches}" th:object="${dto}" method="POST">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Match added to database</div>
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-info btn-block btn-xs">Players</button>
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Host login: <label type="text" th:field="*{hostLogin}"/></th>
+                                <th scope="col">Guest login: <label type="text" th:field="*{guestLogin}"/></th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <button type="button" class="btn btn-info btn-block btn-xs">Games</button>
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Set #</th>
+                                <th scope="col">Host result:</th>
+                                <th scope="col">Guest result:</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="guest, itemStat : ${dto.guestResult}">
+                                <th scope="row" th:text="${itemStat.index+1}"></th>
+                                <td><input type="number" th:field="${dto.hostResult[__${itemStat.index}__]}"/></td>
+                                <td><input type="number" th:field="${dto.guestResult[__${itemStat.index}__]}"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-success btn-block">Add match</button>
+                        <!--<input type="submit" value="Add match"/>-->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<!--<div th:if="${errorMessage}" th:utext="${errorMessage}"-->
+<!--style="color:red;font-style:italic;">-->
+<!--</div>-->
+</body>
+</html>
