@@ -4,8 +4,8 @@ class MatchCreateDto {
 
     private String hostLogin;
     private String guestLogin;
-    private int[] hostResult;
-    private int[] guestResult;
+    private int[] hostResult = new int[5];
+    private int[] guestResult = new int[5];
 
     public MatchCreateDto() {
     }
