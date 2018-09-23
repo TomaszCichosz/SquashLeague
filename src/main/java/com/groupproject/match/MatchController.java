@@ -37,6 +37,7 @@ class MatchController {
         if (!matchService.checkIfLoginExists(dto)) {
             return "error";
         }
+        System.out.println("Added to database " + dto.toString());
         matchService.create(dto);
         return "addmatchTest";
     }
