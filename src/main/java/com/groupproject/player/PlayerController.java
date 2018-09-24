@@ -1,24 +1,26 @@
 package com.groupproject.player;
 
+import com.groupproject.user.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.security.Principal;
+import java.util.*;
 
 @Controller
 @RequestMapping("/players")
 class PlayerController {
 
     private PlayerService playerService;
+    private UserFacade userFacade;
 
     @Autowired
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(PlayerService playerService, UserFacade userFacade) {
         this.playerService = playerService;
+        this.userFacade = userFacade;
     }
 
     @GetMapping
@@ -39,8 +41,16 @@ class PlayerController {
     }
 
     @GetMapping("/opponents")
-    public String getPlayersOpponents(Model model) {
-        //TODO fields: opponentLogin oppRating lost/wonAgainst
+    public String getPlayersOpponents(Model model, Principal principal) {
+        String userLogin = principal.getName();
+        Player player = userFacade.getUserByLogin(userLogin).getPlayer();
+        Map<String, OpponentDto> opponentsData = new HashMap<>();
+
+        opponentsData = playerService.getOpponentsDataAsMatchGuest(opponentsData, player.getMatchesAsGuest());
+        opponentsData = playerService.getOpponentsDataAsMatchHost(opponentsData, player.getMatchesAsHost());
+
+        model.addAttribute("opponentsDataMap", opponentsData);
+        model.addAttribute("playerRating", player.getEloRating());
         return "opponents";
     }
 }
