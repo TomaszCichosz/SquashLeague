@@ -10,8 +10,6 @@ interface PlayerRepository extends CrudRepository<Player, Long> {
 
     Set<Player> findAll();
 
-    //Set<Player> findAllBy(); //TODO
-
     Player findOneByUuid(String uuid);
 
     void deleteByUuid(String uuid);

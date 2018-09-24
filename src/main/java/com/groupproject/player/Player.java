@@ -78,14 +78,6 @@ public class Player extends BaseEntity {
         gamesLost++;
     }
 
-    public void addGameAsHost(Match match) {
-        matchesAsHost.add(match);
-    }
-
-    public void addGameAsGuest(Match match) {
-        matchesAsGuest.add(match);
-    }
-
     public void setEloRating(int eloRating) {
         this.eloRating = eloRating;
     }
