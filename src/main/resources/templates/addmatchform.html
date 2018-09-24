@@ -26,14 +26,18 @@
         <div class="col-md-6">
             <form action="#" th:action="@{/matches}" th:object="${dto}" method="POST">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Add Match</div>
+                    <div class="panel-heading text-center">
+                        <h1><span class="label label-primary">ADD MATCH FORM</span></h1>
+                        <h3><span class="label label-warning" th:text="${error}"></span></h3>
+                        <h3><span class="label label-success" th:text="${added}"></span></h3>
+                    </div>
                     <div class="panel-body">
                         <button type="button" class="btn btn-info btn-block btn-xs">Players</button>
                         <table class="table">
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Host login: <input type="text" th:field="*{hostLogin}"/></th>
+                                <th scope="col">Host login: <input  type="text"  th:field="*{hostLogin}"/></th>
                                 <th scope="col">Guest login: <input type="text" th:field="*{guestLogin}"/></th>
                             </tr>
                             </thead>
@@ -56,19 +60,12 @@
                             </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-success btn-block">Add match</button>
-                        <!--<input type="submit" value="Add match"/>-->
+                        <button type="submit" class="btn btn-primary btn-block">Add match</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<!-- Check if errorMessage is not null and not empty -->
-
-<!--<div th:if="${errorMessage}" th:utext="${errorMessage}"-->
-<!--style="color:red;font-style:italic;">-->
-<!--</div>-->
 </body>
 </html>
