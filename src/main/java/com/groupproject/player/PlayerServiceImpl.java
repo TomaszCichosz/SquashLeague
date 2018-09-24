@@ -1,11 +1,15 @@
 package com.groupproject.player;
 
+import com.groupproject.game.Game;
+import com.groupproject.match.Match;
 import com.groupproject.user.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,5 +45,61 @@ class PlayerServiceImpl implements PlayerService {
     @Override
     public void delete(String uuid) {
         playerRepository.findOneByUuid(uuid).setDeleted(true);
+    }
+
+    @Override
+    public Map<String, OpponentDto> getOpponentsDataAsMatchHost(Map<String, OpponentDto> opponentsData, Set<Match> matchesAsHost) {
+        for (Match match : matchesAsHost) {
+            OpponentDto opponentDto;
+            if (!opponentsData.containsKey(match.getHost().getUser().getLogin())) {
+                opponentDto = new OpponentDto(match.getHost().getUser().getLogin(), match.getHost().getEloRating());
+            } else {
+                opponentDto = opponentsData.get(match.getHost().getUser().getLogin());
+            }
+            int guestPoints = 0;
+            int hostPoints = 0;
+            for (Game game : match.getGames()) {
+                if (game.getGuestResult() > game.getHostResult()) {
+                    guestPoints++;
+                } else {
+                    hostPoints++;
+                }
+            }
+            if (guestPoints > hostPoints) {
+                opponentDto.addLostAgainst();
+            } else {
+                opponentDto.addWonAgainst();
+            }
+            opponentsData.put(opponentDto.getOpponentLogin(), opponentDto);
+        }
+        return opponentsData;
+    }
+
+    @Override
+    public Map<String, OpponentDto> getOpponentsDataAsMatchGuest(Map<String, OpponentDto> opponentsData, Set<Match> matchesAsGuest) {
+        for (Match match : matchesAsGuest) {
+            OpponentDto opponentDto;
+            if (!opponentsData.containsKey(match.getHost().getUser().getLogin())) {
+                opponentDto = new OpponentDto(match.getHost().getUser().getLogin(), match.getHost().getEloRating());
+            } else {
+                opponentDto = opponentsData.get(match.getHost().getUser().getLogin());
+            }
+            int guestPoints = 0;
+            int hostPoints = 0;
+            for (Game game : match.getGames()) {
+                if (game.getGuestResult() > game.getHostResult()) {
+                    guestPoints++;
+                } else {
+                    hostPoints++;
+                }
+            }
+            if (guestPoints > hostPoints) {
+                opponentDto.addWonAgainst();
+            } else {
+                opponentDto.addLostAgainst();
+            }
+            opponentsData.put(opponentDto.getOpponentLogin(), opponentDto);
+        }
+        return opponentsData;
     }
 }
