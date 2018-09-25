@@ -88,6 +88,42 @@ class MatchServiceImpl implements MatchService {
         return userFacade.getUserByLogin(dto.getGuestLogin()) != null;
     }
 
+    @Override
+    public boolean addingGamesValidation(MatchCreateDto dto) {
+        int[] hostResult = dto.getHostResult();
+        int[] guestResult = dto.getGuestResult();
+
+        if (hostResult.length != guestResult.length) {
+            return false;
+        }
+
+        int numberOfGamesNotPlayed = 0;
+
+        for (int i = 0; i < hostResult.length; i++) {
+            if (hostResult[i] < 0 || guestResult[i] < 0) {
+                return false;
+            }
+            if ((hostResult[i] < 11 && guestResult[i] < 11) && (hostResult[i] != 0 && guestResult[i] != 0)) {
+                return false;
+            }
+            if (hostResult[i] == guestResult[i] && (hostResult[i] != 0 && guestResult[i] != 0)) {
+                return false;
+            }
+            if ((hostResult[i] > 11 || guestResult[i] > 11) && Math.abs(hostResult[i] - guestResult[i]) != 2) {
+                return false;
+            }
+            if (hostResult[i] == 0 && guestResult[i] == 0) {
+                numberOfGamesNotPlayed++;
+            }
+        }
+
+        if (numberOfGamesNotPlayed > 2) {
+            return false;
+        }
+
+        return true;
+    }
+
     private String convertArrayOfResultsToScore(int[] hostResults, int[] guestResults) {
         int hostScore = 0;
         int guestScore = 0;

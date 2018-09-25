@@ -41,7 +41,7 @@ class MatchController {
             model.addAttribute("error", "Opponent not found");
             return "addmatchform";
         }
-        if (!true){ //TODO
+        if (!matchService.addingGamesValidation(dto)) {
             model.addAttribute("error", "Wrong score");
             return "addmatchform";
         }

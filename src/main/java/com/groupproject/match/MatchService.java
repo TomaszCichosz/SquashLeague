@@ -12,4 +12,6 @@ interface MatchService {
     void delete(String uuid);
 
     boolean checkIfLoginExists(MatchCreateDto dto);
+
+    boolean addingGamesValidation(MatchCreateDto dto);
 }
