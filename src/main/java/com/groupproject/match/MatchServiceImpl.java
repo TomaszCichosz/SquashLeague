@@ -50,7 +50,20 @@ class MatchServiceImpl implements MatchService {
                 userFacade.getUserByLogin(dto.getGuestLogin()).getPlayer());
         matchRepository.save(match);
 
-        Set<Game> games = matchFacade.getGames(match.getUuid(), dto.getHostResult(), dto.getGuestResult());
+        int numberOfMatches = 5;
+        for (int i = 0; i < dto.getHostResult().length; i++) {
+            if (dto.getHostResult()[i] == 0 && dto.getGuestResult()[i] == 0) {
+                numberOfMatches--;
+            }
+        }
+        int[] hostResult = new int[numberOfMatches];
+        int[] guestResult = new int[numberOfMatches];
+        for (int i = 0; i < numberOfMatches; i++) {
+            hostResult[i] = dto.getHostResult()[i];
+            guestResult[i] = dto.getGuestResult()[i];
+        }
+
+        Set<Game> games = matchFacade.getGames(match.getUuid(), hostResult, guestResult);
         for (Game game : games) {
             match.addGame(game);
         }
