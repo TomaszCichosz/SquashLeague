@@ -25,20 +25,44 @@ class UserController {
         return userService.findAll();
     }
 
-    @PostMapping("/{uuid}")
-    @ResponseBody
-    public void deleteUser(@PathVariable String uuid) {
+
+    @GetMapping("/delete")
+    public String deleteView(Model model) {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        String uuid = userService.findOneByLogin(login).getUuid();
+        model.addAttribute("uuid", uuid);
+        return "delete";
+    }
+
+    @PostMapping("/delete/{uuid}")
+    public String deleteUser(@PathVariable String uuid) {
         userService.deletedAsTrue(uuid);
+        return "index";
     }
 
     @GetMapping("/home")
     public String welcome(Model model) {
-        model.addAttribute("name",SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("name", SecurityContextHolder.getContext().getAuthentication().getName());
         return "home";
     }
 
     @PutMapping("/index")
-    public String register(@ModelAttribute UserRegistrationDto dto) {
+    public String register(@ModelAttribute UserRegistrationDto dto,Model model) {
+        if( userService.checkIfLoginExist(dto.getLogin())){
+            model.addAttribute("dto", new UserRegistrationDto());
+            model.addAttribute("message","User already exists");
+            return "adduser";
+        }
+        if(dto.getLogin().length()<=4){
+            model.addAttribute("dto", new UserRegistrationDto());
+            model.addAttribute("message","Login must have min. 4 letters");
+            return "adduser";
+        }
+        if(dto.getPassword().length()<=4){
+            model.addAttribute("dto", new UserRegistrationDto());
+            model.addAttribute("message","Password must have min. 4 letters");
+            return "adduser";
+        }
         userService.register(dto);
         return "index";
     }
@@ -50,7 +74,7 @@ class UserController {
     }
 
     @GetMapping("/logout")
-    public String logoutUser(){
+    public String logoutUser() {
         SecurityContextHolder.clearContext();
         return "index";
     }
