@@ -98,6 +98,8 @@ class MatchServiceImpl implements MatchService {
         }
 
         int numberOfGamesNotPlayed = 0;
+        int hostWins = 0;
+        int guestWins = 0;
 
         for (int i = 0; i < hostResult.length; i++) {
             if (hostResult[i] < 0 || guestResult[i] < 0) {
@@ -114,6 +116,14 @@ class MatchServiceImpl implements MatchService {
                 return false;
             }
             if ((hostResult[i] > 11 || guestResult[i] > 11) && Math.abs(hostResult[i] - guestResult[i]) != 2) {
+                return false;
+            }
+            if (hostResult[i] > guestResult[i]) {
+                hostWins++;
+            } else {
+                guestWins++;
+            }
+            if (hostWins > 3 || guestWins > 3) {
                 return false;
             }
         }
