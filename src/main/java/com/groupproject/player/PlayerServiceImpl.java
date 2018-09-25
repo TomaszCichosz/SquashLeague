@@ -102,4 +102,42 @@ class PlayerServiceImpl implements PlayerService {
         }
         return opponentsData;
     }
+
+    @Override
+    public List<MatchInfoDto> getMatchesDataAsHost(List<MatchInfoDto> matchesData, Set<Match> matchesAsHost) {
+        for (Match match : matchesAsHost) {
+            int hostPoints = 0;
+            int guestPoints = 0;
+            for (Game game : match.getGames()) {
+                if (game.getGuestResult() > game.getHostResult()) {
+                    guestPoints++;
+                } else {
+                    hostPoints++;
+                }
+            }
+            MatchInfoDto matchInfoDto = new MatchInfoDto(match.getGuest().getUser().getLogin(),
+                    hostPoints, guestPoints);
+            matchesData.add(matchInfoDto);
+        }
+        return matchesData;
+    }
+
+    @Override
+    public List<MatchInfoDto> getMatchesDataAsGuest(List<MatchInfoDto> matchesData, Set<Match> matchesAsGuest) {
+        for (Match match : matchesAsGuest) {
+            int hostPoints = 0;
+            int guestPoints = 0;
+            for (Game game : match.getGames()) {
+                if (game.getGuestResult() > game.getHostResult()) {
+                    guestPoints++;
+                } else {
+                    hostPoints++;
+                }
+            }
+            MatchInfoDto matchInfoDto = new MatchInfoDto(match.getHost().getUser().getLogin(),
+                    guestPoints, hostPoints);
+            matchesData.add(matchInfoDto);
+        }
+        return matchesData;
+    }
 }

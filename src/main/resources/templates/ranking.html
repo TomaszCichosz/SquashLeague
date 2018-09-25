@@ -6,28 +6,31 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Login</th>
-                    <th>Rating</th>
-                    <th>Rank</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="dto,iter :${loginsAndRatings}">
-                    <td th:text="${dto.playerLogin}"></td>
-                    <td th:text="${dto.playerRating}"></td>
-                    <td th:text="${iter.index+1}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-4">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Login</th>
+                        <th>Rating</th>
+                        <th>Rank</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dto,iter :${loginsAndRatings}">
+                        <td th:text="${dto.playerLogin}"></td>
+                        <td th:text="${dto.playerRating}"></td>
+                        <td th:text="${iter.index+1}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-3">
+            </div>
         </div>
     </div>
 </div>
