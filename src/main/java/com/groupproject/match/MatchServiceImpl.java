@@ -123,7 +123,7 @@ class MatchServiceImpl implements MatchService {
             } else {
                 guestWins++;
             }
-            if (hostWins > 3 || guestWins > 3) {
+            if ((hostWins == 3 || guestWins == 3) && (hostResult[i] != 0 || guestResult[i] != 0)) {
                 return false;
             }
         }
