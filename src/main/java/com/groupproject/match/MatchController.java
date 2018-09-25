@@ -49,7 +49,6 @@ class MatchController {
             model.addAttribute("error", "Wrong score");
             return "addmatchform";
         }
-//        dto.setHostLogin(SecurityContextHolder.getContext().getAuthentication().getName()); // uncomment when logged in
         System.out.println("Added to database " + dto.toString());
         matchService.create(dto);
         model.addAttribute("added", "Match added to database");
