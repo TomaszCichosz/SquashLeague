@@ -51,10 +51,10 @@ class PlayerServiceImpl implements PlayerService {
     public Map<String, OpponentDto> getOpponentsDataAsMatchHost(Map<String, OpponentDto> opponentsData, Set<Match> matchesAsHost) {
         for (Match match : matchesAsHost) {
             OpponentDto opponentDto;
-            if (!opponentsData.containsKey(match.getHost().getUser().getLogin())) {
-                opponentDto = new OpponentDto(match.getHost().getUser().getLogin(), match.getHost().getEloRating());
+            if (!opponentsData.containsKey(match.getGuest().getUser().getLogin())) {
+                opponentDto = new OpponentDto(match.getGuest().getUser().getLogin(), match.getGuest().getEloRating());
             } else {
-                opponentDto = opponentsData.get(match.getHost().getUser().getLogin());
+                opponentDto = opponentsData.get(match.getGuest().getUser().getLogin());
             }
             int guestPoints = 0;
             int hostPoints = 0;
