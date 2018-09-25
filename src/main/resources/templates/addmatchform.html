@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <form action="#" th:action="@{/matches}" th:object="${dto}" method="POST">
+            <form action="#" th:action="@{/matches/add}" th:object="${dto}" method="POST">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
                         <h1><span class="label label-primary">ADD MATCH FORM</span></h1>
@@ -37,7 +37,7 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Host login: <input  type="text"  th:field="*{hostLogin}"/></th>
+                                <th scope="col">Host login: <input  type="text"  th:field="*{hostLogin}" readonly="readonly"/></th>
                                 <th scope="col">Guest login: <input type="text" th:field="*{guestLogin}"/></th>
                             </tr>
                             </thead>
