@@ -1,23 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
+<head lang="en" th:fragment="head">
     <title>Add Match</title>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-              th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-              rel="stylesheet" media="screen" /> -->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
-
-    <!--     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-                th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-
-        <link href="../static/css/stylesheet.css"
-              th:href="@{/css/stylesheet.css}" rel="stylesheet" media="screen"/> -->
-
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
 <div class="container">
@@ -37,7 +22,8 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Host login: <input  type="text"  th:field="*{hostLogin}" readonly="readonly"/></th>
+                                <th scope="col">Host login: <input type="text" th:field="*{hostLogin}"
+                                                                   readonly="readonly"/></th>
                                 <th scope="col">Guest login: <input type="text" th:field="*{guestLogin}"/></th>
                             </tr>
                             </thead>
@@ -67,5 +53,7 @@
         </div>
     </div>
 </div>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js" integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw="
+        crossorigin="anonymous"></script>
 </body>
 </html>
