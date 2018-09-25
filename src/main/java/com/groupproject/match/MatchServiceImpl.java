@@ -103,17 +103,18 @@ class MatchServiceImpl implements MatchService {
             if (hostResult[i] < 0 || guestResult[i] < 0) {
                 return false;
             }
-            if ((hostResult[i] < 11 && guestResult[i] < 11) && (hostResult[i] != 0 && guestResult[i] != 0)) {
-                return false;
+            if ((hostResult[i] < 11 && guestResult[i] < 11)) {
+                if (hostResult[i] == 0 && guestResult[i] == 0) {
+                    numberOfGamesNotPlayed++;
+                } else {
+                    return false;
+                }
             }
             if (hostResult[i] == guestResult[i] && (hostResult[i] != 0 && guestResult[i] != 0)) {
                 return false;
             }
             if ((hostResult[i] > 11 || guestResult[i] > 11) && Math.abs(hostResult[i] - guestResult[i]) != 2) {
                 return false;
-            }
-            if (hostResult[i] == 0 && guestResult[i] == 0) {
-                numberOfGamesNotPlayed++;
             }
         }
 
