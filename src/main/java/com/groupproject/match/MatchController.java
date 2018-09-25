@@ -36,6 +36,10 @@ class MatchController {
 
     @PostMapping("/add")
     public String create(@ModelAttribute("dto") MatchCreateDto dto, Model model) {
+        if (dto.getGuestLogin().equals(dto.getHostLogin())) {
+            model.addAttribute("error", "Guest same as Host");
+            return "addmatchform";
+        }
         if (!matchService.checkIfLoginExists(dto)) {
             dto.setGuestLogin("USER NOT FOUND");
             model.addAttribute("error", "Opponent not found");
