@@ -43,7 +43,7 @@ class UserController {
         return "index";
     }
 
-    @GetMapping("adduser")
+    @GetMapping("/adduser")
     public String addUserView(Model model) {
         model.addAttribute("dto", new UserRegistrationDto());
         return "adduser";

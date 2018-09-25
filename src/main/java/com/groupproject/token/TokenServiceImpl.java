@@ -50,5 +50,13 @@ class TokenServiceImpl implements TokenService {
         tokenRepository.save(tokens);
     }
 
+    @Override
+    public boolean checkIsTokenExpired(String uuid){
+        return tokenRepository.findOneByToken(uuid).isExpired();
+    }
 
+    @Override
+    public Token findTokenByUuid(String uuid){
+        return tokenRepository.findOneByToken(uuid);
+    }
 }

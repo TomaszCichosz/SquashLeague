@@ -51,4 +51,6 @@ public class Token extends BaseEntity {
     public User getUser() {
         return user;
     }
+
+
 }

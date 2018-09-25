@@ -26,4 +26,16 @@ class ResetPasswordDto {
     public String getRepeatPassword() {
         return repeatPassword;
     }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
+    }
 }
