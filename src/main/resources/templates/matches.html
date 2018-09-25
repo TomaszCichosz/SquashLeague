@@ -6,28 +6,31 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Opponent</th>
-                    <th>Your Score</th>
-                    <th>Opponent Score</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="matchdto :${matchesDataList}">
-                    <td th:text="${matchdto.getOpponentLogin()}"></td>
-                    <td th:text="${matchdto.getYourScore()}"></td>
-                    <td th:text="${matchdto.getOpponentScore()}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-4">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Opponent</th>
+                        <th>Your Score</th>
+                        <th>Opponent Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="matchdto :${matchesDataList}">
+                        <td th:text="${matchdto.getOpponentLogin()}"></td>
+                        <td th:text="${matchdto.getYourScore()}"></td>
+                        <td th:text="${matchdto.getOpponentScore()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-3">
+            </div>
         </div>
     </div>
 </div>
