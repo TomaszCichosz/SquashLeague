@@ -34,7 +34,7 @@ class MatchController {
         return "addmatchform";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String create(@ModelAttribute("dto") MatchCreateDto dto, Model model) {
         if (!matchService.checkIfLoginExists(dto)) {
             dto.setGuestLogin("USER NOT FOUND");
