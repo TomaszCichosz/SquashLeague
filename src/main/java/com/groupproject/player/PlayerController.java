@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.Principal;
 import java.util.*;
 
 @Controller
@@ -40,6 +39,20 @@ class PlayerController {
         Collections.sort(loginsAndRatings);
         model.addAttribute("loginsAndRatings", loginsAndRatings);
         return "ranking";
+    }
+
+    @GetMapping("/matches")
+    public String getPlayersMatches(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userLogin = authentication.getName();
+        Player player = userFacade.getUserByLogin(userLogin).getPlayer();
+        List<MatchInfoDto> matchesData = new ArrayList<>();
+
+        matchesData = playerService.getMatchesDataAsHost(matchesData, player.getMatchesAsHost());
+        matchesData = playerService.getMatchesDataAsGuest(matchesData, player.getMatchesAsGuest());
+
+        model.addAttribute("matchesDataList", matchesData);
+        return "matches";
     }
 
     @GetMapping("/opponents")
