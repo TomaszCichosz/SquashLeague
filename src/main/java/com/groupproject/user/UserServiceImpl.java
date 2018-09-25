@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,18 +36,27 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto findOneByLogin(String login) {
+        return new UserDto(userRepository.findOneByLogin(login));
+    }
+
+    @Override
     public void deletedAsTrue(String uuid) {
-        userRepository.findOneByUuid(uuid).setDeleted(true);
+        User user = userRepository.findOneByUuid(uuid);
+        user.setDeleted(true);
+        user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
     }
 
     @Override
     public UserDto register(UserRegistrationDto dto) {
-        if (userRepository.existsByLogin(dto.getLogin())) {
-            throw new RuntimeException("User already exists");
-        }
-        User user=new User(dto.getLogin(),passwordEncoder.encode(dto.getPassword()),dto.getEmail());
+        User user = new User(dto.getLogin(), passwordEncoder.encode(dto.getPassword()), dto.getEmail());
         userRepository.save(user);
         playerFacade.createPlayer(user.getUuid());
         return new UserDto(user);
+    }
+
+    @Override
+    public boolean checkIfLoginExist(String login) {
+        return userRepository.existsByLogin(login);
     }
 }

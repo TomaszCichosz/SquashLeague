@@ -36,7 +36,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/index")
-                .failureHandler((req, resp, e) -> resp.sendError(HttpStatus.BAD_REQUEST.value(), "Invalid username or password"))
+                .failureHandler((req, resp, e) -> resp.sendRedirect("/index/error"))
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/users/home")
@@ -63,3 +63,5 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+//(req, resp, e) -> resp.sendError(HttpStatus.BAD_REQUEST.value(), "Invalid username or password")
+//resp.sendRedirect("/index")

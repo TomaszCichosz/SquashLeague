@@ -39,8 +39,6 @@ class TokenController {
 
     @GetMapping("/reset/{uuid}")
     public String getResetPasswordView(@PathVariable String uuid, Model model) {
-//        Token token = tokenService.findTokenByUuid(uuid);
-//        String tokenUuid=token.getToken();
         model.addAttribute("token", uuid);
         model.addAttribute("dto", new ResetPasswordDto());
 
@@ -77,7 +75,6 @@ class TokenController {
         } catch (MailException e) {
             e.printStackTrace();
         }
-
         model.addAttribute("msg", "We sent you link to reset password. Check your mailbox.");
         return "index";
     }
