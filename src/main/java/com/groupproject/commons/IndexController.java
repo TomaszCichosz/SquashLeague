@@ -1,5 +1,6 @@
 package com.groupproject.commons;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,12 @@ public class IndexController {
     @GetMapping("/index/error")
     String error(Model model){
         model.addAttribute("msg","Wrong login or password");
+        return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logoutUser() {
+        SecurityContextHolder.clearContext();
         return "index";
     }
 }
