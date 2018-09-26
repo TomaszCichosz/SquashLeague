@@ -20,7 +20,7 @@ public class SwaggerConfig {
                 .groupName("Squash League")
                 .apiInfo(apiInfo())
                 .select()
-                .paths(regex("/api.*"))
+                .paths(regex("/.*"))
                 .build();
     }
 

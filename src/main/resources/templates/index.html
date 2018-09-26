@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <title>Hello - Squashleague</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h1>Login</h1>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4 form-group">
+            <form action="/index" method="post">
+                <div class="form-group">
+                    <label for="login">Username:</label>
+                    <input type="text" class="form-control" id="login" placeholder="Enter login" name="login"/>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Password" name="password"/>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </form>
+            <label for="login">Not a member?</label>
+            <form action="/users/adduser">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Join now</button>
+                </div>
+            </form>
+            <label for="login">Forgot password?</label>
+            <form action="/passwords/reset/view">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Reset password</button>
+                </div>
+            </form>
+            <h3><span class="label label-warning" th:text="${msg}"></span></h3>
+        </div>
+
+        <div class="col-md-4">
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

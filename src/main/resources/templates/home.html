@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <title>Squash League App</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="jumbotron">
+        <div class="row text-center">
+                <h2>Squash League App</h2>
+        </div>
+        <div class="row text-center">
+            <img src="../../static/images/SquashLeagueLOGO.png" width="400"
+                 th:src="@{/images/SquashLeagueLOGO.jpg}"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3><span class="label label-warning" th:text="${msg}"></span></h3>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+</body>
+</html>

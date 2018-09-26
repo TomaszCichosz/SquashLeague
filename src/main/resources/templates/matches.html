@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <title>Opponents</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Opponent</th>
+                        <th>Your Score</th>
+                        <th>Opponent Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="matchdto :${matchesDataList}">
+                        <td th:text="${matchdto.getOpponentLogin()}"></td>
+                        <td th:text="${matchdto.getYourScore()}"></td>
+                        <td th:text="${matchdto.getOpponentScore()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

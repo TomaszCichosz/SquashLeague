@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <title>Add Match</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="jumbotron">
+        <div class="row text-center">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <form action="#" th:action="@{/matches/add}" th:object="${dto}" method="POST">
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                <h2><span class="label label-primary">ADD MATCH FORM</span></h2>
+                                <h3><span class="label label-warning" th:text="${error}"></span></h3>
+                                <h3><span class="label label-success" th:text="${added}"></span></h3>
+                            </div>
+                            <div class="panel-body">
+                                <button type="button" class="btn btn-info btn-block btn-xs">Players</button>
+                                <table class="table">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Host login: <input type="text" th:field="*{hostLogin}"
+                                                                           readonly="readonly"/></th>
+                                        <th scope="col">Guest login: <input type="text" th:field="*{guestLogin}"/></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                <button type="button" class="btn btn-info btn-block btn-xs">Games</button>
+                                <table class="table table-bordered">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Set #</th>
+                                        <th scope="col">Host result:</th>
+                                        <th scope="col">Guest result:</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr th:each="guest, itemStat : ${dto.guestResult}">
+                                        <th scope="row" th:text="${itemStat.index+1}"></th>
+                                        <td><input type="number" th:field="${dto.hostResult[__${itemStat.index}__]}"/></td>
+                                        <td><input type="number" th:field="${dto.guestResult[__${itemStat.index}__]}"/></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary btn-block">Add match</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

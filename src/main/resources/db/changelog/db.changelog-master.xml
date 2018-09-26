@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="User (generated)" id="1537371637328-1">
+        <createTable tableName="game">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="game_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="guest_result" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="host_result" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="match_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-2">
+        <createTable tableName="matches">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="guest_id" type="BIGINT"/>
+            <column name="host_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-3">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="games_lost" type="INT"/>
+            <column name="games_won" type="INT"/>
+            <column name="login" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="ranking" type="INT"/>
+            <column name="surname" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-4">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_1xc1iry6gqjrvh5cpajiq7l2f" tableName="user"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-5">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_3ltdjxuk5rta9yh6w66n0asq1" tableName="matches"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-6">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_551oy8mny7aga9g2rfi2gr7hg" tableName="game"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-7">
+        <addUniqueConstraint columnNames="login" constraintName="UK_ew1hvam8uwaknuaellwhqchhb" tableName="user"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-8">
+        <createIndex indexName="FK74qkq9n50vrmi7hboof9nue8w" tableName="matches">
+            <column name="host_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-9">
+        <createIndex indexName="FKmhetr296uk34maafesd4iho3u" tableName="game">
+            <column name="match_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-10">
+        <createIndex indexName="FKnyj2e75bppbg6t8sc7xtikn7w" tableName="matches">
+            <column name="guest_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-11">
+        <addForeignKeyConstraint baseColumnNames="host_id" baseTableName="matches"
+                                 constraintName="FK74qkq9n50vrmi7hboof9nue8w" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-12">
+        <addForeignKeyConstraint baseColumnNames="match_id" baseTableName="game"
+                                 constraintName="FKmhetr296uk34maafesd4iho3u" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="matches"/>
+    </changeSet>
+    <changeSet author="User (generated)" id="1537371637328-13">
+        <addForeignKeyConstraint baseColumnNames="guest_id" baseTableName="matches"
+                                 constraintName="FKnyj2e75bppbg6t8sc7xtikn7w" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="brozek95" id="00000000001">
+        <addColumn tableName="game">
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="brozek95" id="00000000002">
+        <addColumn tableName="user">
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+            </column>
+        </addColumn>
+        <addColumn tableName="matches">
+            <column name="deleted" type="boolean" defaultValueBoolean="false">
+            </column>
+        </addColumn>
+    </changeSet>
+
+
+    <changeSet author="Tomasz Cichosz" id="215123-dropForeignKeyConstraint-MatchToUser">
+        <dropForeignKeyConstraint baseTableName="matches" constraintName="FK74qkq9n50vrmi7hboof9nue8w"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="523452-dropForeignKeyConstraint-MatchToUser">
+        <dropForeignKeyConstraint baseTableName="matches" constraintName="FKnyj2e75bppbg6t8sc7xtikn7w"/>
+    </changeSet>
+
+    <changeSet author="Tomasz Cichosz" id="467789-dropColumn-user">
+        <dropColumn tableName="user" columnName="games_lost"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="568569-dropColumn-user">
+        <dropColumn tableName="user" columnName="games_won"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="7634569-dropColumn-user">
+        <dropColumn tableName="user" columnName="name"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="3457236-dropColumn-user">
+        <dropColumn tableName="user" columnName="surname"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="dropColumn-user">
+        <dropColumn tableName="user" columnName="ranking"/>
+    </changeSet>
+
+    <changeSet author="Tomasz Cichosz" id="5234523-createTable-player">
+        <createTable tableName="player">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="elo_rating" type="INT"/>
+            <column name="games_won" type="INT"/>
+            <column name="games_lost" type="INT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="345625-uniqueConstraint-player">
+        <addUniqueConstraint columnNames="uuid" constraintName="UK_snrgs02jawef9204242jgsdre" tableName="player"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="2634234623-index-player">
+        <createIndex indexName="FK0a9diqopkvamdmv414752q5sera2" tableName="player">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="45634563457-index-player">
+        <createIndex indexName="UK_ergshs4nmjhla90a03rf3a7549a1" tableName="player">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Tomasz Cichosz" id="3645733-addForeignKeyConstraint-MatchToPlayer">
+        <addForeignKeyConstraint baseColumnNames="guest_id"
+                                 baseTableName="matches"
+                                 constraintName="FKdhthdrthd6434s34235w34w"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="4568548-addForeignKeyConstraint-MatchToPlayer">
+        <addForeignKeyConstraint baseColumnNames="host_id"
+                                 baseTableName="matches"
+                                 constraintName="FKserg89y34towi3g92093sergh5"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+    </changeSet>
+    <changeSet author="Tomasz Cichosz" id="2345234-addForeignKeyConstraint-PlayerToUser">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="player"
+                                 constraintName="FK0a9diqopkvamdmv414752q5sera2"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+
+
+    <changeSet author="brozek95" id="00000000004">
+        <createTable tableName="token">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime(6)"/>
+            <column name="updated_at" type="datetime(6)"/>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
+            <column name="uuid" type="VARCHAR(255)"/>
+            <column name="token" type="VARCHAR(255)"/>
+            <column name="expired" type="boolean"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="brozek95" id="00000000005">
+        <addUniqueConstraint columnNames="uuid" constraintName="unique_uuid" tableName="token"/>
+    </changeSet>
+    <changeSet author="brozek95" id="00000000006">
+        <createIndex indexName="user_id_index" tableName="player">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="brozek95" id="00000000007">
+        <createIndex indexName="uuid_index" tableName="player">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="brozek95" id="00000000008">
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="token"
+                constraintName="fk_token_user"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"/>
+    </changeSet>
+
+</databaseChangeLog>
