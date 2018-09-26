@@ -4,7 +4,7 @@ import com.groupproject.user.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,17 +26,20 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/api.**").permitAll()
-                .antMatchers("/home.html").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("/index", "/").permitAll()
+                .antMatchers("/users/adduser").permitAll()
+                .antMatchers("/passwords/reset/view").permitAll()
+                .antMatchers("/users/index").permitAll()
+                .antMatchers("index.html","adduser.html","reset-view.html").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable()
                 .and()
                 .cors().disable();
 
         http.formLogin()
-                .loginPage("/index")
-                .failureHandler((req, resp, e) -> resp.sendRedirect("/index/error"))
+                .loginPage("/index").permitAll()
+                .failureHandler((req, resp, e) -> resp.sendRedirect("/index/error")).permitAll()
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/users/home")
@@ -63,5 +66,3 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
-//(req, resp, e) -> resp.sendError(HttpStatus.BAD_REQUEST.value(), "Invalid username or password")
-//resp.sendRedirect("/index")
